@@ -1,29 +1,50 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block content %}
-    <section class="s-content s-content--top-padding">
-        <div class="row narrow">
-            <div class="col-full s-content__header" data-aos="fade-up">
-                <h1 class="display-1 display-1--with-line-sep">Category: {{ cat }}</h1>
-                <p class="lead">{{ cat.description }}.</p>
+    <section class="s-featured">
+        <div class="row">
+            <div class="col-full">
+                <div class="featured-slider featured" data-aos="zoom-in">
+                    {% for post in top_posts %}
+                        <div class="featured__slide">
+                            <div class="entry">
+                                <div class="entry__background"
+                                     style="background-image:url({{ post.image.url }});"></div>
+                                <div class="entry__content">
+                                    <span class="entry__category"><a href="#0">{{ post.category }}</a></span>
+                                    <h1><a href="#0" title="">{{ post.title }}.</a></h1>
+                                    <div class="entry__info">
+                                        <a href="#0" class="entry__profile-pic">
+                                            <img class="avatar" src="{{ post.author.image.url }}" alt="Img">
+                                        </a>
+                                        <ul class="entry__meta">
+                                            <li><a href="#0">{{ post.author.full_name }}</a></li>
+                                            <li>{{ post.created_at.date }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
             </div>
         </div>
-        <div class="row entries-wrap add-top-padding wide">
+    </section>
+    <section class="s-content">
+        <div class="row entries-wrap wide">
             <div class="entries">
                 {% for post in posts %}
                     <article class="col-block">
                         <div class="item-entry" data-aos="zoom-in">
                             <div class="item-entry__thumb">
                                 <a href="single-standard.html" class="item-entry__thumb-link">
-                                    <img src="{{ post.thumbnail.url }}" alt="" data-pagespeed-url-hash="2765086813"
-                                         onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+                                    <img src="{{ post.thumbnail.url }}" alt="Img">
                                 </a>
                             </div>
                             <div class="item-entry__text">
                                 <div class="item-entry__cat">
-                                    {% for tag in post.tags.all %}
-                                        <a href="category.html">{{ tag }}</a>
-                                    {% endfor %}
+                                    <a href="category.html">{{ post.category }}</a>
                                 </div>
                                 <h1 class="item-entry__title"><a href="single-standard.html">{{ post.title }}.</a></h1>
                                 <div class="item-entry__date">
@@ -56,4 +77,5 @@
             </div>
         </div>
     </section>
+
 {% endblock %}

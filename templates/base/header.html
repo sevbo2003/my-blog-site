@@ -33,7 +33,7 @@
                 <a href="#0" title="">Categories</a>
                 <ul class="sub-menu">
                     {% for cat in nav_cats %}
-                        <li><a href="category.html">{{ cat.category }}</a></li>
+                        <li><a href="{% url 'category' cat.category cat.id %}">{{ cat.category }}</a></li>
                     {% endfor %}
 
 
@@ -42,8 +42,8 @@
             <li class="has-children">
                 <a href="#" title="">Language</a>
                 <ul class="sub-menu">
-                    <li><a href="#"><img src="{% static 'images/flags/usa.png' %}" alt="usa" width="32px"></a></li>
-                    <li><a href="#"><img src="{% static 'images/flags/uzb.png' %}" alt="uzb" width="32px"></a></li>
+                    <li><a href="{% url 'home' %}"><img src="{% static 'images/flags/usa.png' %}" alt="usa" width="32px"></a></li>
+                    <li><a href="{% url 'home_uz' %}"><img src="{% static 'images/flags/uzb.png' %}" alt="uzb" width="32px"></a></li>
                 </ul>
             </li>
             <li><a href="page-about.html" title="">About</a></li>
