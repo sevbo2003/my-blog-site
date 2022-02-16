@@ -61,9 +61,17 @@
             <div class="col-full">
                 <nav class="pgn" data-aos="fade-up">
                     <ul>
-                        <li><a class="pgn__prev" href="#0">Prev</a></li>
-                        <li><a class="pgn__num" href="#0">1</a></li>
-                        <li><a class="pgn__next" href="#0">Next</a></li>
+                        {% if posts.has_previous %}
+                            <li><a class="pgn__prev" href="?page={{ posts.previous_page_number }}">Prev</a></li>
+                        {% else %}
+                            <li><a class="pgn__prev">Prev</a></li>
+                        {% endif %}
+                        <li><a class="pgn__num" href="#0">{{ posts.number }}</a></li>
+                        {% if posts.has_next %}
+                            <li><a class="pgn__next" href="?page={{ posts.next_page_number }}">Next</a></li>
+                        {% else %}
+                            <li><a class="pgn__next">Next</a></li>
+                        {% endif %}
                     </ul>
                 </nav>
             </div>
