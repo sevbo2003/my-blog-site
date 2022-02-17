@@ -4099,6 +4099,11 @@ footer [class*="s-footer__"] > .row [class*="col-"]:last-child {
     padding-left: 0;
     margin: 0 1rem
 }
+.entry__header-meta .com_date {
+    display: inline-block;
+    padding-left: 0;
+    margin: 0 0rem
+}
 
 .entry__header-meta span,
 .entry__header-meta a {
