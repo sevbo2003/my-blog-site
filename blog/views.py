@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Category, Author, Tags, Post, Comment
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import CommentForm
 from datetime import datetime
+from django.http import HttpResponseRedirect
 
 
 def index(request):
@@ -94,6 +95,9 @@ def post_detail(request, slug):
                 created_at=datetime
             )
             p.save()
+            link = f"{post.get_absolute_url()}#comments"
+            return HttpResponseRedirect(link)
+            # return redirect(post.get_absolute_url() ,"#comments")
     else:
         comment_form = CommentForm()
     context = {
