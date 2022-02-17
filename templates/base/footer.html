@@ -11,7 +11,8 @@
                         </a>
                         <h5>{{ post.title }}.</h5>
                         <section class="popular__meta">
-                            <span class="popular__author"><span>By</span> <a href="{{ post.get_absolute_url }}">{{ post.author.name }}</a></span>
+                            <span class="popular__author"><span>By</span> <a
+                                    href="{{ post.get_absolute_url }}">{{ post.author.name }}</a></span>
                             <span class="popular__date"><span>on</span> <time>{{ post.created_at.date }}</time></span>
                         </section>
                     </article>
@@ -25,7 +26,8 @@
                     <h3>Categories</h3>
                     <ul class="linklist">
                         {% for nav_cat in nav_cats %}
-                            <li><a href="{% url 'category' nav_cat.category nav_cat.id %}">{{ nav_cat.category }}</a></li>
+                            <li><a href="{% url 'category' nav_cat.category nav_cat.id %}">{{ nav_cat.category }}</a>
+                            </li>
 
                         {% endfor %}
 
@@ -35,10 +37,10 @@
                 <div class="col-six md-six mob-full sitelinks">
                     <h3>Site Links</h3>
                     <ul class="linklist">
-                        <li><a href="#0">Home</a></li>
-                        <li><a href="#0">Blog</a></li>
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'home' %}">Blog</a></li>
                         <li><a href="#0">About</a></li>
-                        <li><a href="#0">Contact</a></li>
+                        <li><a href="{% url 'contact-page' %}">Contact</a></li>
                     </ul>
                 </div>
             </div>
@@ -64,11 +66,10 @@
                 <p>Sit vel delectus amet officiis repudiandae est voluptatem. Tempora maxime provident nisi et fuga et
                     enim exercitationem ipsam. Culpa consequatur occaecati.</p>
                 <div class="subscribe-form">
-                    <form id="mc-form" class="group" novalidate>
-                        <input type="email" value="" name="EMAIL" class="email" id="mc-email"
-                               placeholder="Email Address" required>
-                        <input type="submit" name="subscribe" value="Send">
-                        <label for="mc-email" class="subscribe-message"></label>
+                    <form id="mc-form" action="{% url 'home' %}" class="group" method="post">
+                        {% csrf_token %}
+                        {{ email_form }}
+                        <input type="submit" value="Subscribe">
                     </form>
                 </div>
             </div>
@@ -78,6 +79,9 @@
         <div class="row">
             <div class="col-six">
                 <ul class="footer-social">
+                    <li>
+                        <a href="#0"><i class="fab fa-linkedin"></i></a>
+                    </li>
                     <li>
                         <a href="#0"><i class="fab fa-facebook"></i></a>
                     </li>
@@ -90,15 +94,13 @@
                     <li>
                         <a href="#0"><i class="fab fa-youtube"></i></a>
                     </li>
-                    <li>
-                        <a href="#0"><i class="fab fa-pinterest"></i></a>
-                    </li>
+
                 </ul>
             </div>
             <div class="col-six">
                 <div class="s-footer__copyright">
                             <span>
-                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i
+                                Copyright &copy; All rights reserved | This template is made with <i
                                     class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
                                                                                       target="_blank">Colorlib</a>
                             </span>

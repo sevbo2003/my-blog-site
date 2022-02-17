@@ -5,6 +5,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import CommentForm
 from datetime import datetime
 from django.http import HttpResponseRedirect
+from marketing.forms import EmailForm, ContactForm
+from marketing.models import Email
+from django.core.mail import send_mail
 
 
 def index(request):
@@ -22,12 +25,26 @@ def index(request):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
     top_posts = Post.objects.filter(top=True)[:3]
+    if request.method == 'POST':
+        email_form = EmailForm(request.POST)
+        if email_form.is_valid():
+            email = email_form.cleaned_data['email']
+            print(email)
+            p = Email(
+                email=email,
+                created_at=datetime
+            )
+            p.save()
+    else:
+        email_form = EmailForm()
     context = {
         'posts': posts,
         'top_posts': top_posts,
+        'email_form': email_form
     }
     return render(request, 'index.html', context)
     Post.objects.filter(com)
+
 
 def uz_lang_posts(request):
     key = request.GET.get('search')
@@ -106,3 +123,17 @@ def post_detail(request, slug):
         'comment_form': comment_form
     }
     return render(request, 'post_detail.html', context)
+
+
+def contact_page(request):
+    if request.method == "POST":
+        contact_form = ContactForm(request.POST)
+        if contact_form.is_valid():
+            name = contact_form.cleaned_data['name']
+            email = contact_form.cleaned_data['email']
+            message = contact_form.cleaned_data['message']
+            text = f"{message}\nfrom --> {name}"
+            send_mail('malikov.co', text, 'sevbofx@gmail.com', (email,))
+    else:
+        contact_form = ContactForm()
+    return render(request, 'page-contact.html', {'contact_form': contact_form})

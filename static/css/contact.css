@@ -3852,12 +3852,12 @@ footer [class*="s-footer__"] > .row [class*="col-"]:last-child {
     line-height: 5rem
 }
 
-.s-footer__subscribe #mc-form label {
-    color: #fff;
-    font-family: "Nunito Sans", sans-serif;
-    font-size: 1.3rem;
-    padding: 0 2rem
-}
+/*.s-footer__subscribe #mc-form label {*/
+/*    color: #fff;*/
+/*    font-family: "Nunito Sans", sans-serif;*/
+/*    font-size: 1.3rem;*/
+/*    padding: 0 2rem*/
+/*}*/
 
 .s-footer__subscribe #mc-form label i {
     padding-right: 6px
