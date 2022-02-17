@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect
 from marketing.forms import EmailForm, ContactForm
 from marketing.models import Email
 from django.core.mail import send_mail
+from django.contrib import messages
 
 
 def index(request):
@@ -25,13 +26,20 @@ def index(request):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
     top_posts = Post.objects.filter(top=True)[:3]
+    sent = False
     if request.method == 'POST':
         email_form = EmailForm(request.POST)
         if email_form.is_valid():
             email = email_form.cleaned_data['email']
-            print(email)
-            p = Email(email=email)
-            p.save()
+            if Email.objects.filter(email=email).exists():
+                path = f"{request.META.get('HTTP_REFERER')}#mc-form"
+                return redirect(path)
+            else:
+                p = Email(email=email)
+                p.save()
+                send_mail('Subscribtion', 'You have been successfully subscribed to our newsletter\nIf it is not you please contact us sevbofx@gmail.com', 'secvofx@gmail.com', (email,))
+                path = f"{request.META.get('HTTP_REFERER')}#mc-form"
+                return redirect(path)
     else:
         email_form = EmailForm()
     context = {
