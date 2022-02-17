@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Category, Author, Tags, Post, Comment
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import CommentForm
 from datetime import datetime
@@ -27,7 +27,7 @@ def index(request):
         'top_posts': top_posts,
     }
     return render(request, 'index.html', context)
-
+    Post.objects.filter(com)
 
 def uz_lang_posts(request):
     key = request.GET.get('search')
@@ -97,7 +97,6 @@ def post_detail(request, slug):
             p.save()
             link = f"{post.get_absolute_url()}#comments"
             return HttpResponseRedirect(link)
-            # return redirect(post.get_absolute_url() ,"#comments")
     else:
         comment_form = CommentForm()
     context = {
