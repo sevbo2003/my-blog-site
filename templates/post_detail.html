@@ -65,13 +65,13 @@
                 <div class="col-six s-content__prev">
                     <a href="{{ post1.get_absolute_url }}" rel="prev">
                         <span>Previous Post</span>
-                        {{ post1 }}
+                        {{ post1.title }}
                     </a>
                 </div>
                 <div class="col-six s-content__next">
                     <a href="{{ post2.get_absolute_url }}" rel="next">
                         <span>Next Post</span>
-                        {{ post2 }}
+                        {{ post2.title }}
                     </a>
                 </div>
             </div>
@@ -83,8 +83,6 @@
                         <h3 class="h2">{{ post.comments.all.count }} Comments</h3>
                         <ol class="commentlist">
                             {% for comment in post.comments.all %}
-
-
                                 <li class="depth-1 comment">
                                     <div class="comment__content">
                                         <div class="comment__info">
@@ -104,7 +102,7 @@
 
                         </ol>
                     {% else %}
-                        <h3 class="h2">No comments yet. Be first one</h3>
+                        <h3 class="h2"><span>No comments yet. Write first one</span></h3>
 
                     {% endif %}
 
