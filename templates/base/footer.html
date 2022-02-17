@@ -6,12 +6,12 @@
             <div class="block-1-2 block-m-full popular__posts">
                 {% for post in pop_posts %}
                     <article class="col-block popular__post">
-                        <a href="#0" class="popular__thumb">
+                        <a href="{{ post.get_absolute_url }}" class="popular__thumb">
                             <img src="{{ post.thumbnail.url }}" alt="No">
                         </a>
                         <h5>{{ post.title }}.</h5>
                         <section class="popular__meta">
-                            <span class="popular__author"><span>By</span> <a href="#0">{{ post.author.name }}</a></span>
+                            <span class="popular__author"><span>By</span> <a href="{{ post.get_absolute_url }}">{{ post.author.name }}</a></span>
                             <span class="popular__date"><span>on</span> <time>{{ post.created_at.date }}</time></span>
                         </section>
                     </article>
@@ -25,7 +25,7 @@
                     <h3>Categories</h3>
                     <ul class="linklist">
                         {% for nav_cat in nav_cats %}
-                            <li><a href="#0">{{ nav_cat.category }}</a></li>
+                            <li><a href="{% url 'category' nav_cat.category nav_cat.id %}">{{ nav_cat.category }}</a></li>
 
                         {% endfor %}
 

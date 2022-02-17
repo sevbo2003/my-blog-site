@@ -11,15 +11,15 @@
                                 <div class="entry__background"
                                      style="background-image:url({{ post.image.url }});"></div>
                                 <div class="entry__content">
-                                    <span class="entry__category"><a href="#0">{{ post.category }}</a></span>
-                                    <h1><a href="#0" title="">{{ post.title }}.</a></h1>
+                                    <span class="entry__category"><a href="{% url 'category' post.category.category post.category.id %}">{{ post.category }}</a></span>
+                                    <h1><a href="{{ post.get_absolute_url }}" title="">{{ post.title }}.</a></h1>
                                     <div class="entry__info">
-                                        <a href="#0" class="entry__profile-pic">
+                                        <a href="{{ post.get_absolute_url }}" class="entry__profile-pic">
                                             <img class="avatar" src="{{ post.author.image.url }}" alt="Img">
                                         </a>
                                         <ul class="entry__meta">
-                                            <li><a href="#0">{{ post.author.full_name }}</a></li>
-                                            <li>{{ post.created_at.date }}</li>
+                                            <li><a href="{{ post.get_absolute_url }}">{{ post.author.full_name }}</a></li>
+                                            <li>{{ post.created_at|date:'M d, Y' }}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -38,17 +38,17 @@
                     <article class="col-block">
                         <div class="item-entry" data-aos="zoom-in">
                             <div class="item-entry__thumb">
-                                <a href="single-standard.html" class="item-entry__thumb-link">
+                                <a href="{{ post.get_absolute_url }}" class="item-entry__thumb-link">
                                     <img src="{{ post.thumbnail.url }}" alt="Img">
                                 </a>
                             </div>
                             <div class="item-entry__text">
                                 <div class="item-entry__cat">
-                                    <a href="category.html">{{ post.category }}</a>
+                                    <a href="{% url 'category' post.category.category post.category.id %}">{{ post.category }}</a>
                                 </div>
-                                <h1 class="item-entry__title"><a href="single-standard.html">{{ post.title }}.</a></h1>
+                                <h1 class="item-entry__title"><a href="{{ post.get_absolute_url }}">{{ post.title }}.</a></h1>
                                 <div class="item-entry__date">
-                                    <a href="single-standard.html">{{ post.created_at.date }}</a>
+                                    <a href="{{ post.get_absolute_url }}">{{ post.created_at.date }}</a>
                                 </div>
                             </div>
                         </div>
