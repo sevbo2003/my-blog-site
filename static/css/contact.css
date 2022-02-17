@@ -3802,7 +3802,7 @@ footer [class*="s-footer__"] > .row [class*="col-"]:last-child {
     height: 5.4rem;
     font-size: 1.5rem;
     padding: 1.2rem 100px 1.2rem 60px;
-    background: url(https://preview.colorlib.com/theme/wordsmith/images/icons/icon-mail.svg) 20px center no-repeat, rgba(0, 0, 0, .25);
+    /*background: url(https://preview.colorlib.com/theme/wordsmith/images/icons/icon-mail.svg) 20px center no-repeat, rgba(0, 0, 0, .25);*/
     background-size: 24px 16px, auto;
     margin-bottom: 1.8rem;
     color: #fff;

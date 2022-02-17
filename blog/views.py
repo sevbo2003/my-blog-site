@@ -30,17 +30,13 @@ def index(request):
         if email_form.is_valid():
             email = email_form.cleaned_data['email']
             print(email)
-            p = Email(
-                email=email,
-                created_at=datetime
-            )
+            p = Email(email=email)
             p.save()
     else:
         email_form = EmailForm()
     context = {
         'posts': posts,
         'top_posts': top_posts,
-        'email_form': email_form
     }
     return render(request, 'index.html', context)
     Post.objects.filter(com)

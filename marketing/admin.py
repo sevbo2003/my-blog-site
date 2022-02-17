@@ -4,5 +4,5 @@ from .models import Email
 
 @admin.register(Email)
 class EmailAdmin(admin.ModelAdmin):
-    list_display = ('email', 'created_at')
+    list_display = ('email',)
     search_fields = ('email',)
