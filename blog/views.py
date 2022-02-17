@@ -1,7 +1,10 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Category, Author, Tags, Post
+from .models import Category, Author, Tags, Post, Comment
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .forms import CommentForm
+from datetime import datetime
+
 
 def index(request):
     key = request.GET.get('search')
@@ -28,7 +31,8 @@ def index(request):
 def uz_lang_posts(request):
     key = request.GET.get('search')
     if key:
-        posts = Post.objects.filter(Q(title__icontains=key) | Q(category__category__icontains=key)).filter(language__exact='uz')
+        posts = Post.objects.filter(Q(title__icontains=key) | Q(category__category__icontains=key)).filter(
+            language__exact='uz')
     else:
         posts = Post.objects.filter(language__exact='uz')
     page_num = request.GET.get('page', 1)
@@ -58,6 +62,7 @@ def cat_posts(request, id, category):
         posts = paginator.page(1)
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
+
     context = {
         'cat': cat,
         'posts': posts
@@ -68,16 +73,33 @@ def cat_posts(request, id, category):
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
     try:
-        post1 = Post.objects.get(id=post.id-1)
+        post1 = Post.objects.get(id=post.id - 1)
     except:
         post1 = post
     try:
-        post2 = Post.objects.get(id=post.id+1)
+        post2 = Post.objects.get(id=post.id + 1)
     except:
         post2 = post
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            name = comment_form.cleaned_data['name']
+            email = comment_form.cleaned_data['email']
+            message = comment_form.cleaned_data['message']
+            p = Comment(
+                name=name,
+                email=email,
+                message=message,
+                post=post,
+                created_at=datetime
+            )
+            p.save()
+    else:
+        comment_form = CommentForm()
     context = {
         'post': post,
         'post1': post1,
-        'post2': post2
+        'post2': post2,
+        'comment_form': comment_form
     }
     return render(request, 'post_detail.html', context)
