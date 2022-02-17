@@ -67,7 +67,17 @@ def cat_posts(request, id, category):
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
+    try:
+        post1 = Post.objects.get(id=post.id-1)
+    except:
+        post1 = post
+    try:
+        post2 = Post.objects.get(id=post.id+1)
+    except:
+        post2 = post
     context = {
-        'post': post
+        'post': post,
+        'post1': post1,
+        'post2': post2
     }
     return render(request, 'post_detail.html', context)

@@ -14,7 +14,7 @@
                     <article class="col-block">
                         <div class="item-entry" data-aos="zoom-in">
                             <div class="item-entry__thumb">
-                                <a href="post_detail.html" class="item-entry__thumb-link">
+                                <a href="{{ post.get_absolute_url }}" class="item-entry__thumb-link">
                                     <img src="{{ post.thumbnail.url }}" alt="" data-pagespeed-url-hash="2765086813"
                                          onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
                                 </a>
@@ -25,9 +25,9 @@
                                         <a href="category.html">{{ tag }}</a>
                                     {% endfor %}
                                 </div>
-                                <h1 class="item-entry__title"><a href="post_detail.html">{{ post.title }}.</a></h1>
+                                <h1 class="item-entry__title"><a href="{{ post.get_absolute_url }}">{{ post.title }}.</a></h1>
                                 <div class="item-entry__date">
-                                    <a href="post_detail.html">{{ post.created_at.date }}</a>
+                                    <a href="{{ post.get_absolute_url }}">{{ post.created_at.date }}</a>
                                 </div>
                             </div>
                         </div>
