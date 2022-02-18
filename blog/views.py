@@ -130,6 +130,7 @@ def post_detail(request, slug):
 
 
 def contact_page(request):
+    sent = False
     if request.method == "POST":
         contact_form = ContactForm(request.POST)
         if contact_form.is_valid():
@@ -138,6 +139,7 @@ def contact_page(request):
             message = contact_form.cleaned_data['message']
             text = f"{message}\nfrom --> {name}"
             send_mail('malikov.co', text, 'sevbofx@gmail.com', (email,))
+            sent = True
     else:
         contact_form = ContactForm()
-    return render(request, 'page-contact.html', {'contact_form': contact_form})
+    return render(request, 'page-contact.html', {'contact_form': contact_form, 'sent': sent})
