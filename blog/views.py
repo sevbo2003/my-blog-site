@@ -18,7 +18,7 @@ def index(request):
     else:
         posts = Post.objects.all()
     page_num = request.GET.get('page', 1)
-    paginator = Paginator(posts, 4)
+    paginator = Paginator(posts, 8)
     try:
         posts = paginator.page(page_num)
     except PageNotAnInteger:
@@ -37,9 +37,12 @@ def index(request):
             else:
                 p = Email(email=email)
                 p.save()
-                send_mail('Subscribtion', 'You have been successfully subscribed to our newsletter\nIf it is not you please contact us sevbofx@gmail.com', 'secvofx@gmail.com', (email,))
+                send_mail('Subscribtion',
+                          'You have been successfully subscribed to our newsletter\nIf it is not you please contact us sevbofx@gmail.com',
+                          'secvofx@gmail.com', (email,))
                 path = f"{request.META.get('HTTP_REFERER')}#mc-form"
                 return redirect(path)
+                messages.success(request, 'Form submission successful')
     else:
         email_form = EmailForm()
     context = {
@@ -143,3 +146,7 @@ def contact_page(request):
     else:
         contact_form = ContactForm()
     return render(request, 'page-contact.html', {'contact_form': contact_form, 'sent': sent})
+
+
+def about_page(request):
+    return render(request, 'page-about.html')

@@ -12,7 +12,7 @@
                         <h5>{{ post.title }}.</h5>
                         <section class="popular__meta">
                             <span class="popular__author"><span>By</span> <a
-                                    href="{{ post.get_absolute_url }}">{{ post.author.name }}</a></span>
+                                    href="{{ post.get_absolute_url }}">{{ post.author.full_name }}</a></span>
                             <span class="popular__date"><span>on</span> <time>{{ post.created_at.date }}</time></span>
                         </section>
                     </article>
@@ -39,7 +39,7 @@
                     <ul class="linklist">
                         <li><a href="{% url 'home' %}">Home</a></li>
                         <li><a href="{% url 'home' %}">Blog</a></li>
-                        <li><a href="#0">About</a></li>
+                        <li><a href="{% url 'about-page' %}">About</a></li>
                         <li><a href="{% url 'contact-page' %}">Contact</a></li>
                     </ul>
                 </div>
@@ -51,20 +51,20 @@
     <div class="s-footer__main">
         <div class="row">
             <div class="col-six tab-full s-footer__about">
-                <h4>About Wordsmith</h4>
-                <p>Fugiat quas eveniet voluptatem natus. Placeat error temporibus magnam sunt optio aliquam. Ut ut
-                    occaecati placeat at.
-                    Fuga fugit ea autem. Dignissimos voluptate repellat occaecati minima dignissimos mollitia
-                    consequatur.
-                    Sit vel delectus amet officiis repudiandae est voluptatem. Tempora maxime provident nisi et fuga et
-                    enim exercitationem ipsam. Culpa error
-                    temporibus magnam est voluptatem.
+                <h4>About me</h4>
+                <p>Hello. I am Abdusamad Malikov, A Full Stack Python Developer.
                 </p>
             </div>
             <div class="col-six tab-full s-footer__subscribe">
                 <h4>Our Newsletter</h4>
-                <p>Sit vel delectus amet officiis repudiandae est voluptatem. Tempora maxime provident nisi et fuga et
-                    enim exercitationem ipsam. Culpa consequatur occaecati.</p>
+                {% if messages %}
+                    {% for msg in messages %}
+                        <p>{{ msg }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>By subscribing to our newsletter you receive notification about weekly posts and special offers. Don't lose your chance <b>Subscribe right now</b></p>
+                {% endif %}
+
 
                 <div class="subscribe-form">
                     <form id="mc-form" action="{% url 'home' %}" class="group" method="post">
@@ -81,19 +81,19 @@
             <div class="col-six">
                 <ul class="footer-social">
                     <li>
-                        <a href="#0"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.linkedin.com/in/abdusamad-malikov/"><i class="fab fa-linkedin"></i></a>
                     </li>
                     <li>
-                        <a href="#0"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.facebook.com/abdusamad.malikov.18/"><i class="fab fa-facebook"></i></a>
                     </li>
                     <li>
-                        <a href="#0"><i class="fab fa-twitter"></i></a>
+                        <a href="https://github.com/sevbo2003"><i class="fab fa-github"></i></a>
                     </li>
                     <li>
-                        <a href="#0"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/abdusamad_malikov/"><i class="fab fa-instagram"></i></a>
                     </li>
                     <li>
-                        <a href="#0"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.youtube.com/channel/UCmA8lwHZHfpbSkbv65awfdQ"><i class="fab fa-youtube"></i></a>
                     </li>
 
                 </ul>
@@ -104,6 +104,7 @@
                                 Copyright &copy; All rights reserved | This template is made with <i
                                     class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
                                                                                       target="_blank">Colorlib</a>
+                                Coded by <i class="fa fa-code"></i> by <a href="t.me/ok_no_thanks">Abdusamad</a>
                             </span>
                 </div>
             </div>
